@@ -1,0 +1,7 @@
+{
+  "name": "JourneyApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
