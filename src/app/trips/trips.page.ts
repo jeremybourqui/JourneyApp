@@ -6,6 +6,9 @@ import { AuthService } from "src/app/auth/auth.service";
 import { HttpClient } from "@angular/common/http";
 import { ViewDidEnter } from "@ionic/angular";
 
+// import the environment config.
+import { environment } from "src/environments/environment";
+
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.page.html',
@@ -33,6 +36,10 @@ export class TripsPage implements ViewDidEnter {
   }
 
   ngOnInit() {
+    const url = `${environment.apiUrl}/users/:userId/trips`;
+    this.http.get(url).subscribe((trips) => {
+      console.log(`Trips loaded`, trips);
+    });
   }
 
   // Add a method to log out.

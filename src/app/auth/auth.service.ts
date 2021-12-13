@@ -9,7 +9,9 @@ import { AuthResponse } from "../models/auth-response";
 import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
 
-const API_URL = "https://archiowebjourney.herokuapp.com";
+// import the environment config.
+import { environment } from "src/environments/environment";
+
 
 /**
  * Authentication service for login/logout.
@@ -40,7 +42,8 @@ export class AuthService {
   }
 
   logIn$(authRequest: AuthRequest): Observable<User> {
-    const authUrl = `${API_URL}/users/login`;
+    // replace the hardcoded API URL by the one from the environment config.
+    const authUrl = `${environment.apiUrl}/users/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       delayWhen((auth) => this.saveAuth$(auth)),
       map((auth) => {
