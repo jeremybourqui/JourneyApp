@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ReplaySubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { ReplaySubject, Observable, from } from "rxjs";
+import { delayWhen, map } from "rxjs/operators";
+import { Storage } from '@ionic/storage-angular';
+
 
 import { AuthResponse } from "../models/auth-response";
 import { User } from "../models/user";
@@ -16,10 +18,13 @@ const API_URL = "https://archiowebjourney.herokuapp.com";
 export class AuthService {
   #auth$: ReplaySubject<AuthResponse | undefined>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private storage: Storage) {
     this.#auth$ = new ReplaySubject(1);
-    // Emit an empty value on startup for now
-    this.#auth$.next();
+    this.#auth$ = new ReplaySubject(1);
+    this.storage.get('auth').then((auth) => {
+      // Emit the loaded value into the observable stream.
+      this.#auth$.next(auth);
+    });
   }
 
   isAuthenticated$(): Observable<boolean> {
@@ -37,16 +42,26 @@ export class AuthService {
   logIn$(authRequest: AuthRequest): Observable<User> {
     const authUrl = `${API_URL}/users/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
+      delayWhen((auth) => this.saveAuth$(auth)),
       map((auth) => {
         this.#auth$.next(auth);
         console.log(`User ${auth.user.username} logged in`);
         return auth.user;
       })
+      
     );
+    
+  }
+  private saveAuth$(auth: AuthResponse): Observable<void> {
+    return from(this.storage.set('auth', auth));
   }
 
   logOut(): void {
     this.#auth$.next(null);
+    // Remove the stored authentication from storage when logging out.
+    this.storage.remove('auth');
     console.log("User logged out");
   }
+  
 }
+
