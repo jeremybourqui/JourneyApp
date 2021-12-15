@@ -37,28 +37,22 @@ export class TripsPage implements ViewDidEnter {
     private tripService: TripService
 
   ) {
-    //insertion trips
-    this.trips=[
-      // {title: "dfmgjvbnbdfékb", description: "kxyjdhdvhnéskdfjnbéf", userId: "dsbdfb", _id: "drrgdrhbdb" },
-      // {title: "dkfljvgvsldfkhbvsfldkjhbv", description: "sdjkdhflskdhjfuisadhf", userId: "dsbdfb", _id: "drrgdrhbdb"}
-    ];
- 
-    
+
+
+
+  }
+  ionViewDidEnter(): void {
+
   }
 
-  ionViewDidEnter(): void {
-     // Make an HTTP request to retrieve the trips.
-    const url = "https://archiowebjourney.herokuapp.com/users/:userId/trips";
-    this.http.get(url).subscribe((trips) => {
-      console.log(`Trips loaded`, trips);
+  ionViewWillEnter() {
+    this.tripService.getTrips().subscribe(trips => {
+      this.trips = trips
     });
   }
 
   ngOnInit() {
-    const url = `${environment.apiUrl}/users/:userId/trips`;
-    this.http.get(url).subscribe((trips) => {
-      console.log(`Trips loaded`, trips);
-    });
+    
   }
 
   // Add a method to log out.
@@ -68,11 +62,8 @@ export class TripsPage implements ViewDidEnter {
     this.router.navigateByUrl("/login");
   }
 
-  addTrip(){
-    // this.trips.push(this.tripService.getTrip());
-    this.tripService.getTrip().subscribe(trip => {
-      this.trips.push(trip);
-    });
-  }
+  // addTrip() {
+  //   // this.trips.push(this.tripService.getTrip());
+  // }
 
 }

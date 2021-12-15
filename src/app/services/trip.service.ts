@@ -16,9 +16,9 @@ export class TripService {
   // getTrip(): Observable<Trip> {
   //   return of({ title: "dfmgjvbnbdfékb", description: "kxyjdhdvhnéskdfjnbéf", userId: "dsbdfb", _id: "drrgdrhbdb" });
   // }
-  getTrip(): Observable<Trip> {
+  getTrips(): Observable<Trip[]> {
     return this.http
-      .get<Trip>('https://archiowebjourney.herokuapp.com/users/61b0c80f52ab86e3a4fe88a0/trips')
+      .get<Trip[]>('https://archiowebjourney.herokuapp.com/users/61b0c80f52ab86e3a4fe88a0/trips')
 
   }
 }
