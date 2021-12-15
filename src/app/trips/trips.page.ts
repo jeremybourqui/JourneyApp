@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
 
+//import model
+import { Trip } from "../models/trip";
+//import services
+import { TripService } from "../services/trip.service";
+
 // import Angular's HTTP client.
 import { HttpClient } from "@angular/common/http";
 import { ViewDidEnter } from "@ionic/angular";
@@ -16,6 +21,9 @@ import { environment } from "src/environments/environment";
 })
 export class TripsPage implements ViewDidEnter {
 
+  //insertion trips
+  trips: Trip[];
+
   constructor(
     // Inject the authentication provider.
     private auth: AuthService,
@@ -23,9 +31,20 @@ export class TripsPage implements ViewDidEnter {
     private router: Router,
 
     //Inject the HTTP client
-    public http: HttpClient
+    public http: HttpClient,
 
-  ) { }
+    //Inject trip service
+    private tripService: TripService
+
+  ) {
+    //insertion trips
+    this.trips=[
+      // {title: "dfmgjvbnbdfékb", description: "kxyjdhdvhnéskdfjnbéf", userId: "dsbdfb", _id: "drrgdrhbdb" },
+      // {title: "dkfljvgvsldfkhbvsfldkjhbv", description: "sdjkdhflskdhjfuisadhf", userId: "dsbdfb", _id: "drrgdrhbdb"}
+    ];
+ 
+    
+  }
 
   ionViewDidEnter(): void {
      // Make an HTTP request to retrieve the trips.
@@ -47,6 +66,13 @@ export class TripsPage implements ViewDidEnter {
     console.log("logging out...");
     this.auth.logOut();
     this.router.navigateByUrl("/login");
+  }
+
+  addTrip(){
+    // this.trips.push(this.tripService.getTrip());
+    this.tripService.getTrip().subscribe(trip => {
+      this.trips.push(trip);
+    });
   }
 
 }

@@ -12,5 +12,14 @@
 </ion-header>
 
 <ion-content>
+  <ul>
+    <li *ngFor="let trip of trips">
+      {{ trip.title}} <br/>
+      {{ trip.description}}
+    </li>
+  </ul>
 
+  <p>
+    <button type="button" (click)="addTrip()">Add trip</button>
+  </p>
 </ion-content>
