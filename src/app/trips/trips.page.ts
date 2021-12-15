@@ -36,23 +36,22 @@ export class TripsPage implements ViewDidEnter {
     //Inject trip service
     private tripService: TripService
 
-  ) {
+  ) { }
 
-
-
-  }
   ionViewDidEnter(): void {
 
   }
 
   ionViewWillEnter() {
-    this.tripService.getTrips().subscribe(trips => {
-      this.trips = trips
-    });
+    this.auth.getUser$().subscribe(user => {
+      this.tripService.getTrips(user._id).subscribe(trips => {
+        this.trips = trips
+      })
+    })
   }
 
   ngOnInit() {
-    
+
   }
 
   // Add a method to log out.
