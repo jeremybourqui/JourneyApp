@@ -13,6 +13,7 @@ import { ViewDidEnter } from "@ionic/angular";
 
 // import the environment config.
 import { environment } from "src/environments/environment";
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trips',
@@ -43,11 +44,19 @@ export class TripsPage implements ViewDidEnter {
   }
 
   ionViewWillEnter() {
-    this.auth.getUser$().subscribe(user => {
-      this.tripService.getTrips(user._id).subscribe(trips => {
-        this.trips = trips
-      })
-    })
+    //technique 2 pour récupérer ID de l'utilisateur. Mais pas très propre, double subscribe
+    // this.auth.getUser$().subscribe(user => {
+    //   this.tripService.getTrips(user._id).subscribe(trips => {
+    //     this.trips = trips
+    //   })
+    // })
+
+    //technique 3 pour récupérer ID de l'utilisateur
+    this.auth.getUser$().pipe(
+      switchMap((user) => this.tripService.getTrips(user._id))
+    ).subscribe(trips => {
+      this.trips = trips
+    });
   }
 
   ngOnInit() {
