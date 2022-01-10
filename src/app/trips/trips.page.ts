@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
 
@@ -14,6 +14,9 @@ import { ViewDidEnter } from "@ionic/angular";
 // import the environment config.
 import { environment } from "src/environments/environment";
 import { switchMap } from 'rxjs/operators';
+
+// import custom component
+
 
 @Component({
   selector: 'app-trips',
@@ -35,7 +38,8 @@ export class TripsPage implements ViewDidEnter {
     public http: HttpClient,
 
     //Inject trip service
-    private tripService: TripService
+    private tripService: TripService,
+
 
   ) { }
 
@@ -57,11 +61,14 @@ export class TripsPage implements ViewDidEnter {
     ).subscribe(trips => {
       this.trips = trips
     });
+  
   }
 
   ngOnInit() {
 
   }
+
+
 
   // Add a method to log out.
   logOut() {
@@ -70,8 +77,6 @@ export class TripsPage implements ViewDidEnter {
     this.router.navigateByUrl("/login");
   }
 
-  // addTrip() {
-  //   // this.trips.push(this.tripService.getTrip());
-  // }
+
 
 }
