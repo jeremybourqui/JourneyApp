@@ -22,17 +22,10 @@
         {{ trip.placeCount }} places in this trip
       </div>
       <div class="card-button">
-        <ion-button color="attention" class="delete-button" >DELETE</ion-button>
+        <ion-button color="attention" class="delete-button" (click)="delete(trip._id)">DELETE</ion-button>
         <ion-button color="primary" class="modify-button">MODIFY</ion-button>
       </div>
 
     </ion-card-content>
   </ion-card>
-
-
-
-  
-  <!-- <p>
-    <button type="button" (click)="addTrip()">Add trip</button>
-  </p> -->
 </ion-content>

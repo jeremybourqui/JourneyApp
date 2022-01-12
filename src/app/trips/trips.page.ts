@@ -68,7 +68,21 @@ export class TripsPage implements ViewDidEnter {
 
   }
 
-
+  // Method to Delete a trip
+  delete(tripID:string) {
+    if (this.trips){
+      this.auth.getUser$().pipe(
+        switchMap((user) => this.tripService.deleteTrip(user._id, tripID))
+      ).subscribe(()=> {
+        const index = this.trips.findIndex(trip => trip._id === tripID);
+        if(index > -1){
+          this.trips.splice(index, 1);
+        }
+      });
+      
+    }
+    // this.router.navigate(['']);
+  }
 
   // Add a method to log out.
   logOut() {
