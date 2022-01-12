@@ -12,13 +12,26 @@
 </ion-header>
 
 <ion-content>
-  <ul>
-    <li *ngFor="let trip of trips">
-      {{ trip.title}} <br/>
+  <ion-card *ngFor="let trip of trips">
+    <ion-card-header>
+      <ion-card-title> {{ trip.title}} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
       {{ trip.description}}
-    </li>
-  </ul>
+      <div class="details">
+        {{ trip.placeCount }} places in this trip
+      </div>
+      <div class="card-button">
+        <ion-button color="attention" class="delete-button" >DELETE</ion-button>
+        <ion-button color="primary" class="modify-button">MODIFY</ion-button>
+      </div>
 
+    </ion-card-content>
+  </ion-card>
+
+
+
+  
   <!-- <p>
     <button type="button" (click)="addTrip()">Add trip</button>
   </p> -->

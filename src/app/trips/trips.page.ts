@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
 
@@ -17,6 +17,9 @@ import { switchMap } from 'rxjs/operators';
 
 // import the Websocket service
 import { WebsocketService } from '../services/websocket.service';
+
+// import custom component
+
 
 @Component({
   selector: 'app-trips',
@@ -69,11 +72,14 @@ export class TripsPage implements ViewDidEnter {
     ).subscribe(trips => {
       this.trips = trips
     });
+  
   }
 
   ngOnInit() {
 
   }
+
+
 
   // Add a method to log out.
   logOut() {
@@ -82,8 +88,6 @@ export class TripsPage implements ViewDidEnter {
     this.router.navigateByUrl("/login");
   }
 
-  // addTrip() {
-  //   // this.trips.push(this.tripService.getTrip());
-  // }
+
 
 }

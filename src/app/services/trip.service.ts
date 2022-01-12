@@ -31,4 +31,5 @@ export class TripService {
     return this.http
       .get<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips`);
   }
+  
 }

@@ -15,7 +15,7 @@ import { TripsPage } from './trips.page';
     FormsModule,
     IonicModule,
     TripsPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [TripsPage]
 })
