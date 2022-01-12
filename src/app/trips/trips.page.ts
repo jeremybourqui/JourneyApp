@@ -15,6 +15,9 @@ import { ViewDidEnter } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { switchMap } from 'rxjs/operators';
 
+// import the Websocket service
+import { WebsocketService } from '../services/websocket.service';
+
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.page.html',
@@ -35,9 +38,18 @@ export class TripsPage implements ViewDidEnter {
     public http: HttpClient,
 
     //Inject trip service
-    private tripService: TripService
+    private tripService: TripService,
 
-  ) { }
+    //Inject websocket service
+    private wsService: WebsocketService
+
+  ) { 
+    this.wsService
+    .listen()
+    .subscribe(message => {
+      console.log(message);
+    });
+  }
 
   ionViewDidEnter(): void {
 
