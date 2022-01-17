@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Trip } from "../models/trip";
 import { AuthService } from '../auth/auth.service';
 import { switchMap } from 'rxjs/operators';
+import { TripRequest } from '../models/trip-request';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,11 @@ export class TripService {
   deleteTrip(userID: string, tripID: string): Observable<Trip[]> {
     return this.http
       .delete<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips/${tripID}`);
+  }
+
+  addTrip(userID: string, tripRequest: TripRequest){
+    return this.http
+      .post<Trip>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips/`, tripRequest)
   }
   
 }
