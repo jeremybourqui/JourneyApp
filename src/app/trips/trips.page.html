@@ -12,18 +12,27 @@
 </ion-header>
 
 <ion-content>
-  <div id="filtres">
-    <span>Filtres</span>
+  <div id="order">
+    <span>Order</span>
     <br/>
-    <ion-chip>
+    <ion-chip id="orderAlphabeticDown" class="selected" (click)="orderAlphabeticDown()">
       <ion-label>Alphabetic</ion-label>
+      <ion-icon name="arrow-down"></ion-icon>
     </ion-chip>
-    <ion-chip>
-      <ion-label>Latest</ion-label>
+    <ion-chip id="orderAlphabeticUp" (click)="orderAlphabeticUp()">
+      <ion-label>Alphabetic</ion-label>
+      <ion-icon name="arrow-up"></ion-icon>
     </ion-chip>
-    <ion-chip>
-      <ion-label>Oldest</ion-label>
+    <ion-chip id="orderDateDown" (click)="orderDateDown()">
+      <ion-label>Date</ion-label>
+      <ion-icon name="arrow-down"></ion-icon>
     </ion-chip>
+    <ion-chip id="orderDateUp" (click)="orderDateUp()">
+      <ion-label>Date</ion-label>
+      <ion-icon name="arrow-up"></ion-icon>
+    </ion-chip>
+    
+    
   </div>
 
   <ion-searchbar [(ngModel)]="searchedKeyword"></ion-searchbar>
