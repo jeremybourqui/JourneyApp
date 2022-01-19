@@ -4,6 +4,7 @@ import { AuthService } from "src/app/auth/auth.service";
 
 //import model
 import { Trip } from "../models/trip";
+import { WsMessage } from '../models/wsmessage';
 //import services
 import { TripService } from "../services/trip.service";
 
@@ -48,7 +49,7 @@ export class TripsPage implements ViewDidEnter {
 
   ) { 
     this.wsService
-    .listen()
+    .listen<WsMessage>()
     .subscribe(message => {
       console.log(message);
     });
