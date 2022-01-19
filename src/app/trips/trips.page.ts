@@ -28,6 +28,8 @@ export class TripsPage implements ViewDidEnter {
   //insertion trips
   trips: Trip[];
 
+  redirectUrl:any;
+
   constructor(
     // Inject the authentication provider.
     private auth: AuthService,
@@ -84,13 +86,16 @@ export class TripsPage implements ViewDidEnter {
     // this.router.navigate(['']);
   }
 
+  // Methode to redirect to the page create-trip
+  addRedirect(){
+    this.router.navigateByUrl("/create-trip");
+  }
+
   // Add a method to log out.
   logOut() {
     console.log("logging out...");
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }
-
-
 
 }

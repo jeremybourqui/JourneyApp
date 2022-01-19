@@ -37,4 +37,8 @@ export class TripService {
       .delete<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips/${tripID}`);
   }
   
+  // addTrip(userID: string): Observable<Trip[]>{
+  //   return this.http
+  //     .post<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips`)
+  // }
 }

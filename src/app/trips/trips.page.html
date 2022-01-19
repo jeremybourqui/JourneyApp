@@ -12,6 +12,20 @@
 </ion-header>
 
 <ion-content>
+  <div id="filtres">
+    <span>Filtres</span>
+    <br/>
+    <ion-chip>
+      <ion-label>Alphabetic</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Latest</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Oldest</ion-label>
+    </ion-chip>
+  </div>
+  <ion-searchbar></ion-searchbar>
   <ion-card *ngFor="let trip of trips">
     <ion-card-header>
       <ion-card-title> {{ trip.title}} </ion-card-title>
@@ -28,4 +42,9 @@
 
     </ion-card-content>
   </ion-card>
+
+  <ion-button class="add-button" (click)="addRedirect()">
+    <ion-icon slot="icon-only" name="add"></ion-icon>
+  </ion-button>
+  
 </ion-content>
