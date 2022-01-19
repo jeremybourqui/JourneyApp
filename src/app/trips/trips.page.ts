@@ -32,6 +32,8 @@ export class TripsPage implements ViewDidEnter {
   //insertion trips
   trips: Trip[];
 
+  redirectUrl:any;
+
   constructor(
     // Inject the authentication provider.
     private auth: AuthService,
@@ -80,7 +82,26 @@ export class TripsPage implements ViewDidEnter {
 
   }
 
+  // Method to Delete a trip
+  delete(tripID:string) {
+    if (this.trips){
+      this.auth.getUser$().pipe(
+        switchMap((user) => this.tripService.deleteTrip(user._id, tripID))
+      ).subscribe(()=> {
+        const index = this.trips.findIndex(trip => trip._id === tripID);
+        if(index > -1){
+          this.trips.splice(index, 1);
+        }
+      });
+      
+    }
+    // this.router.navigate(['']);
+  }
 
+  // Methode to redirect to the page create-trip
+  addRedirect(){
+    this.router.navigateByUrl("/create-trip");
+  }
 
   // Add a method to log out.
   logOut() {
@@ -88,7 +109,5 @@ export class TripsPage implements ViewDidEnter {
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }
-
-
 
 }

@@ -12,6 +12,20 @@
 </ion-header>
 
 <ion-content>
+  <div id="filtres">
+    <span>Filtres</span>
+    <br/>
+    <ion-chip>
+      <ion-label>Alphabetic</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Latest</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Oldest</ion-label>
+    </ion-chip>
+  </div>
+  <ion-searchbar></ion-searchbar>
   <ion-card *ngFor="let trip of trips">
     <ion-card-header>
       <ion-card-title routerLink="/places"> {{ trip.title}} </ion-card-title>
@@ -22,17 +36,15 @@
         {{ trip.placeCount }} places in this trip
       </div>
       <div class="card-button">
-        <ion-button color="attention" class="delete-button" >DELETE</ion-button>
+        <ion-button color="attention" class="delete-button" (click)="delete(trip._id)">DELETE</ion-button>
         <ion-button color="primary" class="modify-button">MODIFY</ion-button>
       </div>
 
     </ion-card-content>
   </ion-card>
 
-
-
+  <ion-button class="add-button" (click)="addRedirect()">
+    <ion-icon slot="icon-only" name="add"></ion-icon>
+  </ion-button>
   
-  <!-- <p>
-    <button type="button" (click)="addTrip()">Add trip</button>
-  </p> -->
 </ion-content>

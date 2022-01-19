@@ -5,5 +5,54 @@
 </ion-header>
 
 <ion-content>
+  <form #tripForm="ngForm" (submit)="onSubmit(tripForm)">
+    <ion-list>
+      <!-- Title input -->
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input
+          inputmode="text"
+          #title="ngModel"
+          required="true"
+          name="title"
+          [(ngModel)]="tripRequest.title"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the title is invalid -->
+      <ion-item lines="none" *ngIf="title.invalid && title.touched">
+        <ion-text color="danger">Title is required.</ion-text>
+      </ion-item>
+  
+      <!-- Description input -->
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input
+          inputmode="text"
+          #description="ngModel"
+          required="true"
+          name="description"
+          [(ngModel)]="tripRequest.description"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the description is invalid -->
+      <ion-item lines="none" *ngIf="description.invalid && description.touched">
+        <ion-text color="danger">Description is required.</ion-text>
+      </ion-item>
+    </ion-list>
+  
+    <div class="ion-padding">
+      <!-- Submit button -->
+      <ion-button type="submit" expand="block" [disabled]="tripForm.invalid"
+        >CreateTrip</ion-button
+      >
+  
+      <!-- Error message displayed if the login failed -->
+      <ion-text color="danger" *ngIf="descriptionError"
+        >Trip or description is invalid.</ion-text
+      >
+    </div>
+  </form>
 
 </ion-content>
