@@ -15,8 +15,6 @@ import { ViewDidEnter } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { switchMap } from 'rxjs/operators';
 
-// import custom component
-
 
 @Component({
   selector: 'app-trips',
@@ -28,7 +26,8 @@ export class TripsPage implements ViewDidEnter {
   //insertion trips
   trips: Trip[];
 
-  redirectUrl:any;
+  //searched keyword for search bar
+  searchedKeyword: string;
 
   constructor(
     // Inject the authentication provider.
@@ -86,9 +85,18 @@ export class TripsPage implements ViewDidEnter {
     // this.router.navigate(['']);
   }
 
-  // Methode to redirect to the page create-trip
+  // Search https://archiowebjourney.herokuapp.com/users/616d2a1149271a19eb6e2ad4/trips?title=japon
+
+
+
+  // Redirect to the page create-trip
   addRedirect(){
     this.router.navigateByUrl("/create-trip");
+  }
+
+  // Redirect to the page modify-trip
+  modifyRedirect(tripID: string){
+    this.router.navigateByUrl("/modify-trip"); //probablement modifier selon comment on veut faire
   }
 
   // Add a method to log out.

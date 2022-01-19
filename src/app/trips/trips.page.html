@@ -25,8 +25,10 @@
       <ion-label>Oldest</ion-label>
     </ion-chip>
   </div>
-  <ion-searchbar></ion-searchbar>
-  <ion-card *ngFor="let trip of trips">
+
+  <ion-searchbar [(ngModel)]="searchedKeyword"></ion-searchbar>
+
+  <ion-card *ngFor="let trip of trips | filter:searchedKeyword">
     <ion-card-header>
       <ion-card-title> {{ trip.title}} </ion-card-title>
     </ion-card-header>
@@ -37,7 +39,7 @@
       </div>
       <div class="card-button">
         <ion-button color="attention" class="delete-button" (click)="delete(trip._id)">DELETE</ion-button>
-        <ion-button color="primary" class="modify-button">MODIFY</ion-button>
+        <ion-button color="primary" class="modify-button" (click)="modifyRedirect(trip._id)">MODIFY</ion-button>
       </div>
 
     </ion-card-content>
