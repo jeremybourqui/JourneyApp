@@ -5,5 +5,74 @@
 </ion-header>
 
 <ion-content>
+  <form #signupForm="ngForm" (submit)="onSubmit(signupForm)">
+
+    <ion-list>
+      <!-- mail input -->
+      <ion-item>
+        <ion-label position="floating">Mail</ion-label>
+        <ion-input
+          inputmode="text"
+          #mail="ngModel"
+          required="true"
+          name="mail"
+          [(ngModel)]="signupRequest.mail"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the mail is invalid -->
+      <ion-item lines="none" *ngIf="mail.invalid && mail.touched">
+        <ion-text color="danger">Mail is required.</ion-text>
+      </ion-item>
+
+    
+      <!-- Username input -->
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input
+          inputmode="text"
+          #username="ngModel"
+          required="true"
+          name="username"
+          [(ngModel)]="signupRequest.username"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the username is invalid -->
+      <ion-item lines="none" *ngIf="username.invalid && username.touched">
+        <ion-text color="danger">Username is required.</ion-text>
+      </ion-item>
+  
+      <!-- Password input -->
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input
+          inputmode="text"
+          #password="ngModel"
+          required="true"
+          type="password"
+          name="password"
+          [(ngModel)]="signupRequest.password"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the password is invalid -->
+      <ion-item lines="none" *ngIf="password.invalid && password.touched">
+        <ion-text color="danger">Password is required.</ion-text>
+      </ion-item>
+    </ion-list>
+  
+    <div class="ion-padding">
+      <!-- Submit button -->
+      <ion-button type="submit" expand="block" [disabled]="signupForm.invalid"
+        >Log in</ion-button
+      >
+  
+      <!-- Error message displayed if the login failed -->
+      <ion-text color="danger" *ngIf="signupError"
+        >Username or password is invalid.</ion-text
+      >
+    </div>
+  </form>
 
 </ion-content>
