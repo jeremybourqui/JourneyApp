@@ -15,8 +15,6 @@ import { ViewDidEnter } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { switchMap } from 'rxjs/operators';
 
-// import custom component
-
 
 @Component({
   selector: 'app-trips',
@@ -28,7 +26,8 @@ export class TripsPage implements ViewDidEnter {
   //insertion trips
   trips: Trip[];
 
-  redirectUrl:any;
+  //searched keyword for search bar
+  searchedKeyword: string;
 
   constructor(
     // Inject the authentication provider.
@@ -50,6 +49,7 @@ export class TripsPage implements ViewDidEnter {
   }
 
   ionViewWillEnter() {
+
     //technique 2 pour récupérer ID de l'utilisateur. Mais pas très propre, double subscribe
     // this.auth.getUser$().subscribe(user => {
     //   this.tripService.getTrips(user._id).subscribe(trips => {
@@ -61,13 +61,70 @@ export class TripsPage implements ViewDidEnter {
     this.auth.getUser$().pipe(
       switchMap((user) => this.tripService.getTrips(user._id))
     ).subscribe(trips => {
-      this.trips = trips
+      this.trips = trips.sort((a,b) => a.title > b.title ? 1: -1) //pour s'assurer que c'est bien dand l'ordre alphabétique
     });
   
   }
 
   ngOnInit() {
 
+  }
+
+  // Methods to order
+
+  orderAlphabeticDown(){
+    // add class .selected to selected and remove from other
+    const element = document.getElementById("orderAlphabeticDown");
+    const selected = document.querySelector(".selected");
+    if(selected){
+      selected.classList.remove("selected")
+    }
+    element.classList.add("selected");
+
+    //order by alphabetic
+    return this.trips.sort((a,b) => a.title > b.title ? 1: -1);
+    
+  }
+  orderAlphabeticUp(){
+    // add class .selected to selected and remove from other
+    const element = document.getElementById("orderAlphabeticUp");
+    const selected = document.querySelector(".selected");
+    if(selected){
+      selected.classList.remove("selected")
+    }
+    element.classList.add("selected");
+
+    //order by alphabetic invert
+    return this.trips.sort((a,b) => a.title < b.title ? 1: -1);
+    
+  }
+  orderDateDown(){
+    // add class .selected to selected and remove from other
+    const element = document.getElementById("orderDateDown");
+    const selected = document.querySelector(".selected");
+    if(selected){
+      selected.classList.remove("selected")
+    }
+    element.classList.add("selected");
+
+    //order by latest created
+    return this.trips.sort((a,b) => {
+      return <any>new Date(b.createdAt) - <any>new Date(a.createdAt);
+    })
+  }
+  orderDateUp(){
+    // add class .selected to selected and remove from other
+    const element = document.getElementById("orderDateUp");
+    const selected = document.querySelector(".selected");
+    if(selected){
+      selected.classList.remove("selected")
+    }
+    element.classList.add("selected");
+
+    //order by oldest created
+    return this.trips.sort((a,b) => {
+      return <any>new Date(a.createdAt) - <any>new Date(b.createdAt);
+    })
   }
 
   // Method to Delete a trip
@@ -83,12 +140,17 @@ export class TripsPage implements ViewDidEnter {
       });
       
     }
-    // this.router.navigate(['']);
   }
 
-  // Methode to redirect to the page create-trip
+
+  // Redirect to the page create-trip
   addRedirect(){
     this.router.navigateByUrl("/create-trip");
+  }
+
+  // Redirect to the page modify-trip
+  modifyRedirect(tripID: string){
+    this.router.navigateByUrl("/modify-trip"); //probablement modifier selon comment on veut faire
   }
 
   // Add a method to log out.
