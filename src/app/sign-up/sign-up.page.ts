@@ -40,6 +40,8 @@ export class SignUpPage implements OnInit {
         console.warn(`Signup failed: ${err.message}`);
       },
     });
+
+    
     
   }
 
