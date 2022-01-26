@@ -46,20 +46,35 @@
 
       <!-- Location input -->
       <ion-item>
-        <ion-label position="floating">Location</ion-label>
+        <ion-label position="floating">Longitude</ion-label>
         <ion-input
-          inputmode="text"
-          #location="ngModel"
-          required="true"
+          inputmode="number"
+          #longitude="ngModel"
           
-          name="location"
-          [(ngModel)]="placeRequest.location"
+          name="longitude"
+          [(ngModel)]="placeRequest.location.coordinates[1]"
         ></ion-input>
       </ion-item>
   
       <!-- Error message displayed if the location is invalid -->
-      <ion-item lines="none" *ngIf="location.invalid && location.touched">
-        <ion-text color="danger">Location is required.</ion-text>
+      <ion-item lines="none" *ngIf="longitude.invalid && longitude.touched">
+        <ion-text color="danger">Longitude is required.</ion-text>
+      </ion-item>
+
+      <!-- Location input -->
+      <ion-item>
+        <ion-label position="floating">Latitude</ion-label>
+        <ion-input
+          inputmode="number"
+          #latitude="ngModel"
+          name="latitude"
+          [(ngModel)]="placeRequest.location.coordinates[0]"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the location is invalid -->
+      <ion-item lines="none" *ngIf="longitude.invalid && longitude.touched">
+        <ion-text color="danger">Longitude is required.</ion-text>
       </ion-item>
 
       <!-- Picture input -->
@@ -88,8 +103,7 @@
   
       <!-- Error message displayed if the login failed -->
       <ion-text color="danger" *ngIf="formError"
-        >Username or password is invalid.</ion-text
-      >
+        >Form is invalid.</ion-text>
     </div>
   </form>
 

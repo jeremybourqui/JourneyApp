@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { PlaceRequest } from 'src/app/models/place-request';
 import { TripService } from 'src/app/services/trip.service';
 
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-create-place',
@@ -28,7 +29,7 @@ export class CreatePlacePage implements OnInit {
       description: undefined,
       location:{
         type: "Point",
-        coordinates: [54.3498, -6.25],
+        coordinates: [undefined, undefined],
         },
       pictureUrl: undefined
     }
@@ -38,7 +39,7 @@ export class CreatePlacePage implements OnInit {
      if (form.invalid){
        return;
      }
-
+      
      this.formError = false;
 
      this.auth.getUser$().pipe(
@@ -54,6 +55,22 @@ export class CreatePlacePage implements OnInit {
    };
 
   ngOnInit(): void {
+    
+    // const printCurrentPosition = async () => {
+    //   const coordinates = await Geolocation.getCurrentPosition();
+    //   console.log('Current position:', coordinates.coords);
+    //   }
+    // printCurrentPosition();
+
+    const CurrentPosition = async () => {
+      const coordinates = await Geolocation.getCurrentPosition();
+      this.placeRequest.location.coordinates[0] = coordinates.coords.latitude;
+      this.placeRequest.location.coordinates[1] = coordinates.coords.longitude;
+      console.log('Current position:', coordinates.coords.latitude, coordinates.coords.longitude);
+      }
+      CurrentPosition();
+  
+
   }
 
 }
