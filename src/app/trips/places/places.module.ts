@@ -6,14 +6,21 @@ import { IonicModule } from '@ionic/angular';
 
 import { PlacesPageRoutingModule } from './places-routing.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { PlacesPage } from './places.page';
+
+// import for search bar
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     IonicModule,
-    PlacesPageRoutingModule
+    PlacesPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [PlacesPage]
 })

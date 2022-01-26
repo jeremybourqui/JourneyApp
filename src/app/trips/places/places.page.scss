@@ -1,0 +1,33 @@
+.details{
+    text-align: right;
+    margin: 30px auto 10px auto;
+}
+
+.card-buttons{
+    display: grid;
+    column-gap: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "delete modify";
+}
+
+.delete-button{
+    margin:0;
+    grid-area: delete;
+    width: 50%;
+    --color: var(--attention, #EB445A);
+}
+
+.modify-button{
+    margin:0;
+    grid-area: modify;
+    width: 50%;
+}
+
+ion-button.add-button{
+    width: 3rem;
+    height: 3rem;
+    --border-radius: 100%;
+    position:fixed;
+    bottom: 50px;
+    right: 20px;
+}

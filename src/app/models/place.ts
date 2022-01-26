@@ -4,7 +4,7 @@ export type Place = {
     tripId: string;
     location: {
         type: string;
-        coordinates: [ Number ];
+        coordinates: [ Number, Number ];
     }
     pictureUrl: string;
     _id: string;

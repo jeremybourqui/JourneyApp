@@ -7,6 +7,7 @@ import { Trip } from "../models/trip";
 import { WsMessage } from '../models/wsmessage';
 //import services
 import { TripService } from "../services/trip.service";
+import { PlaceService } from "../services/place.service";
 
 // import Angular's HTTP client.
 import { HttpClient } from "@angular/common/http";
@@ -16,14 +17,11 @@ import { ViewDidEnter } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { switchMap } from 'rxjs/operators';
 
-<<<<<<< HEAD
 // import the Websocket service
 import { WebsocketService } from '../services/websocket.service';
 
 // import custom component
 
-=======
->>>>>>> 2534fa4b36c885f4e34f548b90d19b5c6e54cfee
 
 @Component({
   selector: 'app-trips',
@@ -49,6 +47,7 @@ export class TripsPage implements ViewDidEnter {
 
     //Inject trip service
     private tripService: TripService,
+    private placeService: PlaceService,
 
     //Inject websocket service
     private wsService: WebsocketService
@@ -159,6 +158,10 @@ export class TripsPage implements ViewDidEnter {
     }
   }
 
+  //Redirect to the places page
+  getRedirect(tripID:string){
+    this.router.navigateByUrl("/places");
+    }
 
   // Redirect to the page create-trip
   addRedirect(){

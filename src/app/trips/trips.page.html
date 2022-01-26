@@ -39,7 +39,7 @@
 
   <ion-card *ngFor="let trip of trips | filter:searchedKeyword">
     <ion-card-header>
-      <ion-card-title routerLink="/places"> {{ trip.title}} </ion-card-title>
+      <ion-card-title (click)="getRedirect(trip._id)" tappable> {{ trip.title}} </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       {{ trip.description}}
