@@ -1,6 +1,17 @@
-.details{
-    text-align: right;
-    margin: 30px auto 10px auto;
+.card-content{
+    display: grid;
+    column-gap: 0;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: "img subtitle";
+}
+
+.img-content {
+    margin:10px;
+    grid-area: img;
+}
+.subtitle-content {
+    margin:10px;
+    grid-area: subtitle;
 }
 
 .card-buttons{
@@ -30,4 +41,12 @@ ion-button.add-button{
     position:fixed;
     bottom: 50px;
     right: 20px;
+}
+
+ion-img {
+    border-radius: 5px;
+}
+
+ion-text {
+    text-align: center;
 }

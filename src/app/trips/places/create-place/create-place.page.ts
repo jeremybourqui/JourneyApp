@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap } from 'rxjs/operators';
 
 
@@ -22,36 +22,39 @@ export class CreatePlacePage implements OnInit {
 
   formError: boolean;
 
-  constructor(private auth: AuthService, private router: Router, private placeService: PlaceService) {
+  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService) {
     this.placeRequest = {
       title: undefined,
       description: undefined,
-      location:{
+      location: {
         type: "Point",
         coordinates: [54.3498, -6.25],
-        },
+      },
       pictureUrl: undefined
     }
-   }
+  }
 
-   onSubmit(form: NgForm){
-     if (form.invalid){
-       return;
-     }
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
 
-     this.formError = false;
+    this.formError = false;
+    const routeParams = this.route.snapshot.paramMap;
+    const tripIdFromRoute = String(routeParams.get('tripId'));
 
-     this.auth.getUser$().pipe(
-      switchMap((user) => this.placeService.addPlace(user._id, "61deedc4e2914fc943558eda", this.placeRequest))
+    this.auth.getUser$().pipe(
+      switchMap((user) => this.placeService.addPlace(user._id, tripIdFromRoute, this.placeRequest))
     ).subscribe({
       next: () => this.router.navigateByUrl("/"),
       error: (err) => {
-             this.formError = true;
-             console.warn(`Error: failed: ${err.message}`)}
+        this.formError = true;
+        console.warn(`Error: failed: ${err.message}`)
+      }
     });
 
 
-   };
+  };
 
   ngOnInit(): void {
   }

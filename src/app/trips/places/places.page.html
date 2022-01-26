@@ -1,24 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Places</ion-title>
+    <ion-title>{{trip?.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-text><p class="details">{{trip?.description}}</p></ion-text>
   <ion-card *ngFor="let place of places">
     <ion-card-header>
-      <ion-img [src]="place.pictureUrl"></ion-img>
       <ion-card-title> {{ place.title}} </ion-card-title>
+      <div class="card-content">
+        <ion-img class="img-content" [src]="place.pictureUrl"></ion-img>
+        <ion-card-subtitle class="subtitle-content">{{ place.description}}</ion-card-subtitle>
+      </div>
+
     </ion-card-header>
     <ion-card-content>
-      {{ place.description}}
       <div class="card-button">
-        <ion-button color="attention" class="delete-button">DELETE</ion-button>
+        <ion-button color="attention" class="delete-button" (click)="delete(place._id)">DELETE</ion-button>
         <ion-button color="primary" class="modify-button">MODIFY</ion-button>
       </div>
 
     </ion-card-content>
   </ion-card>
-  
+
+  <ion-button class="add-button" [routerLink]="[trip?._id, 'create-place']">
+    <ion-icon slot="icon-only" name="add"></ion-icon>
+  </ion-button>
+
 </ion-content>

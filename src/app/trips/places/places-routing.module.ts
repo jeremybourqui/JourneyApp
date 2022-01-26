@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PlacesPage
   },
   {
-    path: 'create-place',
+    path: ':tripId/create-place',
     loadChildren: () => import('../../Trips/Places/create-place/create-place.module').then( m => m.CreatePlacePageModule)
   },
   {
