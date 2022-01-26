@@ -14,7 +14,7 @@
 <ion-content>
   <div id="order">
     <span>Order</span>
-    <br/>
+    <br />
     <ion-chip id="orderAlphabeticDown" class="selected" (click)="orderAlphabeticDown()">
       <ion-label>Alphabetic</ion-label>
       <ion-icon name="arrow-down"></ion-icon>
@@ -31,25 +31,28 @@
       <ion-label>Date</ion-label>
       <ion-icon name="arrow-up"></ion-icon>
     </ion-chip>
-    
-    
+
+
   </div>
 
   <ion-searchbar [(ngModel)]="searchedKeyword"></ion-searchbar>
 
   <ion-card *ngFor="let trip of trips | filter:searchedKeyword">
     <ion-card-header>
-      <ion-card-title (click)="getRedirect(trip._id)" tappable> {{ trip.title}} </ion-card-title>
+      <div [routerLink]="[trip._id, 'places']" tappable>
+        <ion-card-title> {{ trip.title}} </ion-card-title>
+      </div>
     </ion-card-header>
     <ion-card-content>
-      {{ trip.description}}
-      <div class="details">
-        {{ trip.placeCount }} places in this trip
+      <div [routerLink]="[trip._id, 'places']" tappable>
+        {{ trip.description}}
+        <div class="details">
+          {{ trip.placeCount }} places in this trip
+        </div>
       </div>
       <div class="card-button">
         <ion-button color="attention" class="delete-button" (click)="delete(trip._id)">DELETE</ion-button>
-        <ion-button color="primary" class="modify-button" [routerLink]="['/modify-trip', trip._id]"
-        >MODIFY</ion-button>
+        <ion-button color="primary" class="modify-button" [routerLink]="['/modify-trip', trip._id]">MODIFY</ion-button>
       </div>
 
     </ion-card-content>
@@ -58,5 +61,5 @@
   <ion-button class="add-button" (click)="addRedirect()">
     <ion-icon slot="icon-only" name="add"></ion-icon>
   </ion-button>
-  
+
 </ion-content>

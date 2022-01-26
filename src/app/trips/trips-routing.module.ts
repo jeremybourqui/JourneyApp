@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('../Trips/create-trip/create-trip.module').then( m => m.CreateTripPageModule)
   },
   {
-    path: 'places',
+    path: ':tripId/places',
     loadChildren: () => import('../Trips/places/places.module').then( m => m.PlacesPageModule)
   },
   {

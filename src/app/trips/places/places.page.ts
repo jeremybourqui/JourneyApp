@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
 
 //import services
@@ -27,11 +27,12 @@ export class PlacesPage implements OnInit {
   //insertion places
   places: Place[];
 
-  //insertion trips
-  trips: Trip[];
+  //insertion trip
+  trip?: Trip;
 
   constructor(
 
+    private route: ActivatedRoute,
     // Inject the authentication provider.
     private auth: AuthService,
     // Inject the router
@@ -48,11 +49,15 @@ export class PlacesPage implements OnInit {
 
   ) {}
 
-  ionViewWillEnter(tripID) {
+  ionViewWillEnter() {
+
+    // get the trip id from the current route.
+    const routeParams = this.route.snapshot.paramMap;
+    const tripIdFromRoute = String(routeParams.get('tripId'));
 
     this.auth.getUser$().pipe(
       switchMap((user) =>
-      this.placeService.getPlaces(user._id, tripID))
+      this.placeService.getPlaces(user._id, tripIdFromRoute))
       ).subscribe(places => {
           this.places = places
         });
