@@ -50,13 +50,7 @@ export class CreateTripPage implements OnInit {
 
      this.tripError = false;
 
-    //  this.tripService.addTrip('userid', this.tripRequest).subscribe({
-    //    next: () => this.router.navigateByUrl("/"),
-    //    error: (err) => {
-    //      this.tripError = true;
-    //      console.warn(`Error: failed: ${err.message}`)
-    //    }
-    //  })
+
 
     this.auth.getUser$().pipe(
       switchMap((user) => this.tripService.addTrip(user._id, this.tripRequest))
@@ -66,7 +60,6 @@ export class CreateTripPage implements OnInit {
              this.tripError = true;
              console.warn(`Error: failed: ${err.message}`)}
     });
-
 
 
 

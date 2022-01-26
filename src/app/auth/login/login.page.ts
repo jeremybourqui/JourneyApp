@@ -52,4 +52,8 @@ export class LoginPage {
       },
     });
   }
+
+  addRedirect(){
+    this.router.navigateByUrl("/sign-up");
+  }
 }

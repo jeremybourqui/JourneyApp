@@ -8,7 +8,7 @@ export type Place = {
     }
     pictureUrl: string;
     _id: string;
-    createdAt: Date;
-    modifiedAt: Date;
+    createdAt: string;
+    modifiedAt: string;
     __v: number;
   };

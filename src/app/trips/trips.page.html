@@ -48,7 +48,8 @@
       </div>
       <div class="card-button">
         <ion-button color="attention" class="delete-button" (click)="delete(trip._id)">DELETE</ion-button>
-        <ion-button color="primary" class="modify-button" (click)="modifyRedirect(trip._id)">MODIFY</ion-button>
+        <ion-button color="primary" class="modify-button" [routerLink]="['/modify-trip', trip._id]"
+        >MODIFY</ion-button>
       </div>
 
     </ion-card-content>
