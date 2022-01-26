@@ -24,28 +24,18 @@ export class CreatePlacePage implements OnInit {
 
   formError: boolean;
 
-<<<<<<< HEAD
-  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService) {
-=======
-  constructor(private picture: PictureService, private auth: AuthService, private router: Router, private placeService: PlaceService) {
->>>>>>> d62a13f75065cc59e66ada5b781433d0eba80d35
+  constructor(private picture: PictureService, private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService) {
     this.placeRequest = {
       title: undefined,
       description: undefined,
       location: {
         type: "Point",
-<<<<<<< HEAD
-        coordinates: [54.3498, -6.25],
-      },
-=======
         coordinates: [undefined, undefined],
         },
->>>>>>> d62a13f75065cc59e66ada5b781433d0eba80d35
       pictureUrl: undefined
     }
   }
 
-<<<<<<< HEAD
   onSubmit(form: NgForm) {
     if (form.invalid) {
       return;
@@ -54,14 +44,6 @@ export class CreatePlacePage implements OnInit {
     this.formError = false;
     const routeParams = this.route.snapshot.paramMap;
     const tripIdFromRoute = String(routeParams.get('tripId'));
-=======
-   onSubmit(form: NgForm){
-     if (form.invalid){
-       return;
-     }
-      
-     this.formError = false;
->>>>>>> d62a13f75065cc59e66ada5b781433d0eba80d35
 
     this.auth.getUser$().pipe(
       switchMap((user) => this.placeService.addPlace(user._id, tripIdFromRoute, this.placeRequest))
@@ -81,12 +63,8 @@ export class CreatePlacePage implements OnInit {
        console.log(this.placeRequest);}
      );
 
-<<<<<<< HEAD
-  };
-=======
      
    }
->>>>>>> d62a13f75065cc59e66ada5b781433d0eba80d35
 
   ngOnInit(): void {
 
