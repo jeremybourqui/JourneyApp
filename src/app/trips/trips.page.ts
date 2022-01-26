@@ -61,7 +61,7 @@ export class TripsPage implements ViewDidEnter {
     this.auth.getUser$().pipe(
       switchMap((user) => this.tripService.getTrips(user._id))
     ).subscribe(trips => {
-      this.trips = trips.sort((a,b) => a.title > b.title ? 1: -1) //pour s'assurer que c'est bien dand l'ordre alphabétique
+      this.trips = trips.sort((a,b) => a.title > b.title ? 1: -1) //pour s'assurer que c'est bien dand l'ordre alphabétique      
     });
   
   }

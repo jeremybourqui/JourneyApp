@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'places',
     loadChildren: () => import('../Trips/places/places.module').then( m => m.PlacesPageModule)
+  },
+  {
+    path: 'modify-trip/:tripId',
+    loadChildren: () => import('./modify-trip/modify-trip.module').then( m => m.ModifyTripPageModule)
   }
 ];
 

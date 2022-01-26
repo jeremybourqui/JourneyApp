@@ -5,6 +5,8 @@ import { Trip } from "../models/trip";
 import { AuthService } from '../auth/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { TripRequest } from '../models/trip-request';
+import { environment } from "src/environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,19 +32,31 @@ export class TripService {
   // }
   getTrips(userID: string): Observable<Trip[]> {
     return this.http
-      .get<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips`);
+      .get<Trip[]>(`${environment.apiUrl}/users/${userID}/trips`);
+  }
+
+  getSingleTrip(userID: string, tripID): Observable<Trip> {
+    return this.http
+      .get<Trip>(`${environment.apiUrl}/users/${userID}/trips/${tripID}`);
   }
 
   deleteTrip(userID: string, tripID: string): Observable<Trip[]> {
     return this.http
-      .delete<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips/${tripID}`);
+      .delete<Trip[]>(`${environment.apiUrl}/users/${userID}/trips/${tripID}`);
   }
 
   addTrip(userID: string, tripRequest: TripRequest){
     return this.http
-      .post<Trip>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips/`, tripRequest)
+      .post<Trip>(`${environment.apiUrl}/users/${userID}/trips/`, tripRequest)
+  }
+
+  modifyTrip(userID: string, tripID: string, tripRequest: TripRequest){
+    return this.http
+      .patch<Trip>(`${environment.apiUrl}/users/${userID}/trips/${tripID}`, tripRequest)
   }
   
+  
+
   // addTrip(userID: string): Observable<Trip[]>{
   //   return this.http
   //     .post<Trip[]>(`https://archiowebjourney.herokuapp.com/users/${userID}/trips`)
