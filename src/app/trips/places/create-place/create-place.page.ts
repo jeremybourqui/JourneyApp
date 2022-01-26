@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { PlaceService } from 'src/app/services/place.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { PictureService } from 'src/app/picture/picture.service';
 
 import { PlaceRequest } from 'src/app/models/place-request';
 import { TripService } from 'src/app/services/trip.service';
@@ -23,7 +24,7 @@ export class CreatePlacePage implements OnInit {
 
   formError: boolean;
 
-  constructor(private auth: AuthService, private router: Router, private placeService: PlaceService) {
+  constructor(private picture: PictureService, private auth: AuthService, private router: Router, private placeService: PlaceService) {
     this.placeRequest = {
       title: undefined,
       description: undefined,
@@ -50,17 +51,19 @@ export class CreatePlacePage implements OnInit {
              this.formError = true;
              console.warn(`Error: failed: ${err.message}`)}
     });
-
-
    };
 
+   takePicture(){
+     console.log("test");
+     this.picture.takeAndUploadPicture().subscribe(image => {
+      this.placeRequest.pictureUrl = image.url;
+       console.log(this.placeRequest);}
+     );
+
+     
+   }
+
   ngOnInit(): void {
-    
-    // const printCurrentPosition = async () => {
-    //   const coordinates = await Geolocation.getCurrentPosition();
-    //   console.log('Current position:', coordinates.coords);
-    //   }
-    // printCurrentPosition();
 
     const CurrentPosition = async () => {
       const coordinates = await Geolocation.getCurrentPosition();
@@ -69,8 +72,6 @@ export class CreatePlacePage implements OnInit {
       console.log('Current position:', coordinates.coords.latitude, coordinates.coords.longitude);
       }
       CurrentPosition();
-  
-
   }
 
 }

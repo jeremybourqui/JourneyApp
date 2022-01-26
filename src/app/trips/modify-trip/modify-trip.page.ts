@@ -21,7 +21,7 @@ export class ModifyTripPage implements OnInit {
 
   trip?: Trip;
 
-  tripRequest: TripRequest;
+  tripRequest?: TripRequest;
   tripError: boolean;
 
   constructor(
@@ -76,5 +76,4 @@ export class ModifyTripPage implements OnInit {
    });
   }
   
-
 }
