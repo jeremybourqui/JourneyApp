@@ -24,7 +24,7 @@ export class CreatePlacePage implements OnInit {
 
   formError: boolean;
 
-  constructor(private picture: PictureService, private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService) {
+  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService, private picture: PictureService) {
     this.placeRequest = {
       title: undefined,
       description: undefined,
@@ -63,8 +63,7 @@ export class CreatePlacePage implements OnInit {
        console.log(this.placeRequest);}
      );
 
-     
-   }
+  };
 
   ngOnInit(): void {
 

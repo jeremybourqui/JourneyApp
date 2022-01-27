@@ -171,7 +171,7 @@ export class TripsPage implements ViewDidEnter {
 
   // Redirect to the page modify-trip
   modifyRedirect(tripID: string){
-    this.router.navigateByUrl("/modify-trip"); //probablement modifier selon comment on veut faire
+    this.router.navigateByUrl("/modify-trip");
   }
 
   // Add a method to log out.
