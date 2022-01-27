@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>PlaceDetails</ion-title>
+    <ion-title>{{placeDetails?.title}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,20 +10,20 @@
 <ion-content>
   <!-- <ion-card> -->
     <ion-card-header>
-      <ion-img *ngIf="placeDetails.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
-      <ion-card-title> {{placeDetails?.title}} </ion-card-title>
+      <ion-img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
     </ion-card-header>
     <ion-card-content>
       <p>
         {{placeDetails?.description}}
       </p>
       <div id="map">
-        ICI VIENDRA LA MAP
+        <canvas width=600 height=300 style='background-color: #EEE;'></canvas>
+        <div id="coordinate">
+          Longitude: {{placeDetails?.location.coordinates[0]}},
+          Latitude: {{placeDetails?.location.coordinates[1]}}
+        </div>
       </div>
-      <div id="coordinate">
-        Longitude: {{placeDetails?.location.coordinates[0]}},
-        Latitude: {{placeDetails?.location.coordinates[1]}}
-      </div>
+      
     </ion-card-content>
   <!-- </ion-card> -->
   
@@ -32,7 +32,12 @@
     <ion-icon slot="icon-only" name="create"></ion-icon>
   </ion-button>
 
-  <ion-button color="attention" (click)="delete(placeDetails?._id, placeDetails?.tripId)" class="delete-button" ><!--faut que j'affiche popup de vérification-->
+  <!--<ion-button color="attention" (click)="delete(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
+    <ion-icon slot="icon-only" name="trash"></ion-icon>
+  </ion-button>-->
+
+  <!-- avec pop up de vérification -->
+  <ion-button color="attention" (click)="showConfirmAlert(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
     <ion-icon slot="icon-only" name="trash"></ion-icon>
   </ion-button>
 

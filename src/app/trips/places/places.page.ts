@@ -23,6 +23,9 @@ import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/u
 import { latLng, MapOptions, tileLayer, Map, Marker, marker } from 'leaflet';
 import { defaultIcon } from '../../default-marker';
 
+import { AlertController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',
@@ -63,7 +66,11 @@ export class PlacesPage implements OnInit {
     private placeService: PlaceService,
 
     //Inject trip service
-    private tripService: TripService
+    private tripService: TripService,
+
+    //Inject alertcontroller to make a popup before deleting
+    public atrCtrl: AlertController,
+
 
 
   ) {
@@ -104,7 +111,31 @@ export class PlacesPage implements OnInit {
 
   }
 
-  // Method to Delete a trip
+  // Pop up
+  async showConfirmAlert(placeID:string) {
+    const alertConfirm = await this.atrCtrl.create({
+      header: 'Delete',
+      message: 'Are you sure to delete this place?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          // handler: () => {
+          //   console.log('No clicked');
+          // }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.delete(placeID);
+          }
+        }
+      ]
+    });
+    await alertConfirm.present();
+  }
+
+  // Method to Delete a place
   delete(placeID: string) {
     // get the trip id from the current route.
     const routeParams = this.route.snapshot.paramMap;

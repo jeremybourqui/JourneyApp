@@ -12,6 +12,7 @@ import { PlaceRequest } from 'src/app/models/place-request';
 import { TripService } from 'src/app/services/trip.service';
 
 import { Geolocation } from '@capacitor/geolocation';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-place',
@@ -24,7 +25,7 @@ export class CreatePlacePage implements OnInit {
 
   formError: boolean;
 
-  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService, private picture: PictureService) {
+  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private placeService: PlaceService, private picture: PictureService, private location: Location) {
     this.placeRequest = {
       title: undefined,
       description: undefined,
@@ -48,7 +49,7 @@ export class CreatePlacePage implements OnInit {
     this.auth.getUser$().pipe(
       switchMap((user) => this.placeService.addPlace(user._id, tripIdFromRoute, this.placeRequest))
     ).subscribe({
-      next: () => this.router.navigateByUrl("/"),
+      next: () => this.location.back(),
       error: (err) => {
         this.formError = true;
         console.warn(`Error: failed: ${err.message}`)

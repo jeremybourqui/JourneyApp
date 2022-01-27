@@ -22,6 +22,7 @@ import { switchMap } from 'rxjs/operators';
 import { WebsocketService } from '../services/websocket.service';
 
 // import custom component
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -51,7 +52,10 @@ export class TripsPage implements ViewDidEnter {
     private placeService: PlaceService,
 
     //Inject websocket service
-    private wsService: WebsocketService
+    private wsService: WebsocketService,
+
+    //Inject alertcontroller to make a popup before deleting
+    public atrCtrl: AlertController,
 
   ) { 
     this.wsService
@@ -142,6 +146,31 @@ export class TripsPage implements ViewDidEnter {
     return this.trips.sort((a,b) => {
       return <any>new Date(a.createdAt) - <any>new Date(b.createdAt);
     })
+  }
+
+
+  // Pop up
+  async showConfirmAlert(tripID:string) {
+    const alertConfirm = await this.atrCtrl.create({
+      header: 'Delete',
+      message: 'Are you sure to delete this place?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          // handler: () => {
+          //   console.log('No clicked');
+          // }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.delete(tripID);
+          }
+        }
+      ]
+    });
+    await alertConfirm.present();
   }
 
   // Method to Delete a trip
