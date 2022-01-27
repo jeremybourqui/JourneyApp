@@ -2,16 +2,20 @@
     display: grid;
     column-gap: 0;
     grid-template-columns: 1fr 1fr; 
-    grid-template-areas: "img subtitle";
+    grid-template-areas: "img text";
 }
 
 .img-content {
     margin:10px;
     grid-area: img;
 }
-.subtitle-content {
+.textWithImage-content {
     margin:10px;
-    grid-area: subtitle;
+    grid-area: text;
+}
+
+.textWithoutImage-content {
+    margin:10px 0px 0px 0px;
 }
 
 .card-buttons{

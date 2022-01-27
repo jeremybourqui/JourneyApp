@@ -5,6 +5,7 @@ import { AuthService } from "src/app/auth/auth.service";
 //import model
 import { Trip } from "../models/trip";
 import { WsMessage } from '../models/wsmessage';
+
 //import services
 import { TripService } from "../services/trip.service";
 import { PlaceService } from "../services/place.service";
@@ -77,7 +78,7 @@ export class TripsPage implements ViewDidEnter {
     this.auth.getUser$().pipe(
       switchMap((user) => this.tripService.getTrips(user._id))
     ).subscribe(trips => {
-      this.trips = trips.sort((a,b) => a.title > b.title ? 1: -1) //pour s'assurer que c'est bien dand l'ordre alphabétique      
+      this.trips = trips.sort((a,b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1: -1) //pour s'assurer que c'est bien dand l'ordre alphabétique      
     });
   
   }
@@ -98,7 +99,7 @@ export class TripsPage implements ViewDidEnter {
     element.classList.add("selected");
 
     //order by alphabetic
-    return this.trips.sort((a,b) => a.title > b.title ? 1: -1);
+    return this.trips.sort((a,b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1: -1);
     
   }
   orderAlphabeticUp(){
@@ -111,7 +112,7 @@ export class TripsPage implements ViewDidEnter {
     element.classList.add("selected");
 
     //order by alphabetic invert
-    return this.trips.sort((a,b) => a.title < b.title ? 1: -1);
+    return this.trips.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? 1: -1);
     
   }
   orderDateDown(){

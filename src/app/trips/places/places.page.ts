@@ -32,6 +32,8 @@ export class PlacesPage implements OnInit {
   //insertion trip
   trip?: Trip;
 
+  //searched keyword for search bar
+  searchedKeyword: string;
 
   constructor(
 
@@ -62,7 +64,7 @@ export class PlacesPage implements OnInit {
       switchMap((user) =>
         this.placeService.getPlaces(user._id, tripIdFromRoute))
     ).subscribe(places => {
-      this.places = places.sort((a, b) => a.title > b.title ? 1 : -1)
+      this.places = places.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
     });
 
   }

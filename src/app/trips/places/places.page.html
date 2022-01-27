@@ -5,13 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-text><p class="details">{{trip?.description}}</p></ion-text>
-  <ion-card *ngFor="let place of places">
+  <ion-text><p>{{trip?.description}}</p></ion-text>
+  <ion-searchbar [(ngModel)]="searchedKeyword"></ion-searchbar>
+  <ion-card *ngFor="let place of places | filter:searchedKeyword">
     <ion-card-header>
       <ion-card-title> {{ place.title}} </ion-card-title>
       <div class="card-content">
-        <ion-img class="img-content" [src]="place.pictureUrl"></ion-img>
-        <ion-card-subtitle class="subtitle-content">{{ place.description}}</ion-card-subtitle>
+        <ion-img class="img-content" *ngIf="place.pictureUrl" [src]="place.pictureUrl"></ion-img>
+        <ion-card-text [ngClass]="{'textWithImage-content':place.pictureUrl, 'textWithoutImage-content':!place.pictureUrl}">{{ place.description}}</ion-card-text>
       </div>
 
     </ion-card-header>
