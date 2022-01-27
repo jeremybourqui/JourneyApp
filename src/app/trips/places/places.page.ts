@@ -19,6 +19,9 @@ import { TripRequest } from 'src/app/models/trip-request';
 import { switchMap } from 'rxjs/operators';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
+import { AlertController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',
@@ -48,7 +51,11 @@ export class PlacesPage implements OnInit {
     private placeService: PlaceService,
 
     //Inject trip service
-    private tripService: TripService
+    private tripService: TripService,
+
+    //Inject alertcontroller to make a popup before deleting
+    public atrCtrl: AlertController,
+
 
   ) { }
 
@@ -65,6 +72,30 @@ export class PlacesPage implements OnInit {
       this.places = places.sort((a, b) => a.title > b.title ? 1 : -1)
     });
 
+  }
+
+  // Pop up
+  async showConfirmAlert(placeID:string) {
+    const alertConfirm = await this.atrCtrl.create({
+      header: 'Delete',
+      message: 'Are you sure to delete this place?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          // handler: () => {
+          //   console.log('No clicked');
+          // }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.delete(placeID);
+          }
+        }
+      ]
+    });
+    await alertConfirm.present();
   }
 
   // Method to Delete a place

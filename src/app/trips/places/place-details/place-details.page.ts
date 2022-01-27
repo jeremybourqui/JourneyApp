@@ -71,7 +71,7 @@ export class PlaceDetailsPage implements OnInit {
   ngOnInit() {
   }
 
-  // Method to Delete a place
+  // Pop up
   async showConfirmAlert(placeID:string, tripID:string) {
     const alertConfirm = await this.atrCtrl.create({
       header: 'Delete',
