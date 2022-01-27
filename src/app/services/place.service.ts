@@ -26,6 +26,7 @@ export class PlaceService {
     return this.http
       .delete<Place[]>(`${environment.apiUrl}/users/${userID}/trips/${tripID}/places/${placeID}`);
   }
+  
   addPlace(userID: string, tripID: string, PlaceRequest: PlaceRequest){
     return this.http.post<Place>(`${environment.apiUrl}/users/${userID}/trips/${tripID}/places`, PlaceRequest)
   }
