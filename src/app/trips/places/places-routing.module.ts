@@ -13,9 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('../../Trips/Places/create-place/create-place.module').then( m => m.CreatePlacePageModule)
   },
   {
-    path: 'place-details',
+    path: 'place-details/:placeId',
     loadChildren: () => import('../../Trips/Places/place-details/place-details.module').then( m => m.PlaceDetailsPageModule)
-  }
+  },
+
 ];
 
 @NgModule({

@@ -102,4 +102,9 @@ export class PlacesPage implements OnInit {
     })
   }
 
+  //Redirect to the places page
+  getRedirect(placeID:string){
+    this.router.navigateByUrl("/place-details");
+  }
+
 }
