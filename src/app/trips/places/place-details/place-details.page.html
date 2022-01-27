@@ -10,7 +10,7 @@
 <ion-content>
   <!-- <ion-card> -->
     <ion-card-header>
-      <ion-img [src]="placeDetails?.pictureUrl"></ion-img>
+      <ion-img *ngIf="placeDetails.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
       <ion-card-title> {{placeDetails?.title}} </ion-card-title>
     </ion-card-header>
     <ion-card-content>

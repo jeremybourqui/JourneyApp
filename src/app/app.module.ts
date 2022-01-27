@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { AuthInterceptorService } from "./auth/auth-interceptor.service";
     IonicModule.forRoot(), 
     AppRoutingModule, 
     HttpClientModule, 
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    LeafletModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

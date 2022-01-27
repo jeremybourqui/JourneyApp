@@ -6,6 +6,7 @@
 
 <ion-content>
   <ion-text><p>{{trip?.description}}</p></ion-text>
+  <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers" (leafletMapReady)="onMapReady($event)"></div>
   <ion-searchbar [(ngModel)]="searchedKeyword"></ion-searchbar>
   <ion-card *ngFor="let place of places | filter:searchedKeyword">
     <ion-card-header>

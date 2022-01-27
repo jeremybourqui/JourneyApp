@@ -13,6 +13,9 @@ import { PlacesPage } from './places.page';
 // import for search bar
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+// import Leaflet
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpClientModule,
     IonicModule,
     PlacesPageRoutingModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    LeafletModule
   ],
   declarations: [PlacesPage]
 })

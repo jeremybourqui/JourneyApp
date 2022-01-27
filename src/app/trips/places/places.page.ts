@@ -19,6 +19,10 @@ import { TripRequest } from 'src/app/models/trip-request';
 import { switchMap } from 'rxjs/operators';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
+// import Leaflet
+import { latLng, MapOptions, tileLayer, Map, Marker, marker } from 'leaflet';
+import { defaultIcon } from '../../default-marker';
+
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',
@@ -34,6 +38,15 @@ export class PlacesPage implements OnInit {
 
   //searched keyword for search bar
   searchedKeyword: string;
+
+  //insertion options map
+  mapOptions: MapOptions;
+
+  //insertion map
+  map: Map;
+
+  // insertion markers map
+  mapMarkers: Marker[];
 
   constructor(
 
@@ -52,7 +65,20 @@ export class PlacesPage implements OnInit {
     //Inject trip service
     private tripService: TripService
 
-  ) { }
+
+  ) {
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
+
+  }
 
   ionViewWillEnter() {
 
@@ -64,7 +90,16 @@ export class PlacesPage implements OnInit {
       switchMap((user) =>
         this.placeService.getPlaces(user._id, tripIdFromRoute))
     ).subscribe(places => {
-      this.places = places.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+      this.places = places.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
+      if (places[0]) {
+        this.map.setView([this.places[0].location.coordinates[0], this.places[0].location.coordinates[1]], 13);
+        this.mapMarkers = []
+        for (let i = 0; i < places.length; i++) {
+          this.mapMarkers.push(marker([places[i].location.coordinates[0], places[i].location.coordinates[1]], { icon: defaultIcon }).bindTooltip(this.places[i].title))
+            ;
+        }
+      }
+
     });
 
   }
@@ -104,9 +139,28 @@ export class PlacesPage implements OnInit {
     })
   }
 
+  getPlaces() {
+    const routeParams = this.route.snapshot.paramMap;
+    const tripIdFromRoute = String(routeParams.get('tripId'));
+    this.auth.getUser$().pipe(
+      switchMap((user) =>
+        this.placeService.getPlaces(user._id, tripIdFromRoute))
+    ).subscribe(places => {
+      this.places = places.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+    });
+  }
+
   //Redirect to the places page
-  getRedirect(placeID:string){
+  getRedirect(placeID: string) {
     this.router.navigateByUrl("/place-details");
   }
+
+  onMapReady(map: Map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 0);
+    this.map = map;
+  }
+
 
 }
