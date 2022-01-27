@@ -18,6 +18,8 @@ import { switchMap } from 'rxjs/operators';
 
 import { Location } from '@angular/common';
 
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-place-details',
@@ -43,7 +45,10 @@ export class PlaceDetailsPage implements OnInit {
     private placeService: PlaceService,
     //Inject place details service
     private placeDetailsService: PlaceDetailsService,
-    private location: Location
+    //Inject location to go back after delete
+    private location: Location,
+    //Inject alertcontroller to make a popup before deleting
+    public atrCtrl: AlertController,
 
   ) { }
 
@@ -67,17 +72,43 @@ export class PlaceDetailsPage implements OnInit {
   }
 
   // Method to Delete a place
+  async showConfirmAlert(placeID:string, tripID:string) {
+    const alertConfirm = await this.atrCtrl.create({
+      header: 'Delete',
+      message: 'Are you sure to delete this place?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          // handler: () => {
+          //   console.log('No clicked');
+          // }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.delete(placeID, tripID);
+          }
+        }
+      ]
+    });
+    await alertConfirm.present();
+  }
+
+  //Method to delete
   delete(placeID:string, tripID:string) {
     if (this.placeDetails){
       this.auth.getUser$().pipe(
         switchMap((user) => this.placeDetailsService.deletePlace(user._id, tripID, placeID))
       ).subscribe({
-        next: () => this.router.navigateByUrl("/")
+        next: () => this.location.back()
         
       });
       
     }
   }
+
+
 
     // Redirect to the page modify-trip
     editRedirect(){

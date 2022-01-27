@@ -7,7 +7,7 @@
 <ion-content>
   <ion-text><p class="details">{{trip?.description}}</p></ion-text>
   <ion-card *ngFor="let place of places">
-    <ion-card-header>
+    <ion-card-header [routerLink]="['place-details', place._id]" tappable>
       <ion-card-title> {{ place.title}} </ion-card-title>
       <div class="card-content">
         <ion-img class="img-content" [src]="place.pictureUrl"></ion-img>

@@ -67,7 +67,7 @@ export class PlacesPage implements OnInit {
 
   }
 
-  // Method to Delete a trip
+  // Method to Delete a place
   delete(placeID: string) {
     // get the trip id from the current route.
     const routeParams = this.route.snapshot.paramMap;
