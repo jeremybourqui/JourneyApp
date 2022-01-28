@@ -99,7 +99,7 @@ export class PlacesPage implements OnInit {
     ).subscribe(places => {
       this.places = places.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
       if (places[0]) {
-        this.map.setView([this.places[0].location.coordinates[0], this.places[0].location.coordinates[1]], 13);
+        this.map.setView([this.places[0].location.coordinates[0], this.places[0].location.coordinates[1]], 8);
         this.mapMarkers = []
         for (let i = 0; i < places.length; i++) {
           this.mapMarkers.push(marker([places[i].location.coordinates[0], places[i].location.coordinates[1]], { icon: defaultIcon }).bindTooltip(this.places[i].title))
