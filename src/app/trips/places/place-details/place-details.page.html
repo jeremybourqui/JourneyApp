@@ -27,7 +27,6 @@
     </ion-card-content>
   <!-- </ion-card> -->
 
-  <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers" (leafletMapReady)="onMapReady($event)"></div>
   
 
   <ion-button class="edit-button" (click)="editRedirect()">
@@ -43,5 +42,7 @@
     <ion-icon slot="icon-only" name="trash"></ion-icon>
   </ion-button>
 
+  <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers" (leafletMapReady)="onMapReady($event)"></div>
 
 </ion-content>
+
