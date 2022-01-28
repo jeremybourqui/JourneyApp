@@ -5,6 +5,7 @@ ion-button.edit-button{
     position:fixed;
     bottom: 120px;
     right: 20px;
+    z-index: 10;
 }
 
 ion-button.delete-button{
@@ -15,6 +16,7 @@ ion-button.delete-button{
     bottom: 50px;
     right: 20px;
     --color: var(--attention, #EB445A);
+    z-index: 20;
 }
 
 
@@ -25,6 +27,7 @@ ion-button.delete-button{
 
 .map {
     height: 50%;
+    z-index: 3;
 }
 
 #map{
