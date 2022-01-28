@@ -11,17 +11,20 @@
       <ion-item>
         <ion-label position="floating">Mail</ion-label>
         <ion-input
-          inputmode="text"
+          inputmode="email"
           #mail="ngModel"
           required="true"
+          email="true"
           name="mail"
           [(ngModel)]="authRequest.mail"
+          minlength="3"
+          maxlength="50"
         ></ion-input>
       </ion-item>
   
       <!-- Error message displayed if the username is invalid -->
       <ion-item lines="none" *ngIf="mail.invalid && mail.touched">
-        <ion-text color="danger">Mail is required.</ion-text>
+        <ion-text color="danger">A valid mail is required.</ion-text>
       </ion-item>
   
       <!-- Password input -->

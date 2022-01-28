@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CreateTrip</ion-title>
+    <ion-title>Create a Trip</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -19,12 +19,15 @@
           required="true"
           name="title"
           [(ngModel)]="tripRequest.title"
+          minlength="3"
+          maxlength="100"
+          
         ></ion-input>
       </ion-item>
   
       <!-- Error message displayed if the title is invalid -->
       <ion-item lines="none" *ngIf="title.invalid && title.touched">
-        <ion-text color="danger">Title is required.</ion-text>
+        <ion-text color="danger">Title is required, between 3 and 100 characters</ion-text>
       </ion-item>
   
       <!-- Description input -->
@@ -36,24 +39,26 @@
           required="true"
           name="description"
           [(ngModel)]="tripRequest.description"
+          minlength="3"
+          maxlength="1000"
         ></ion-input>
       </ion-item>
   
       <!-- Error message displayed if the description is invalid -->
       <ion-item lines="none" *ngIf="description.invalid && description.touched">
-        <ion-text color="danger">Description is required.</ion-text>
+        <ion-text color="danger">Description is required, between 3 and 1000 characters</ion-text>
       </ion-item>
     </ion-list>
   
     <div class="ion-padding">
       <!-- Submit button -->
       <ion-button type="submit" expand="block" [disabled]="tripForm.invalid"
-        >CreateTrip</ion-button
+        >Create a Trip</ion-button
       >
   
       <!-- Error message displayed if the description failed -->
       <ion-text color="danger" *ngIf="tripError"
-        >Trip or description is invalid.</ion-text
+        >Title or description is invalid.</ion-text
       >
     </div>
   </form>
