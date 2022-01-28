@@ -31,5 +31,16 @@ export class PlaceService {
     return this.http.post<Place>(`${environment.apiUrl}/users/${userID}/trips/${tripID}/places`, PlaceRequest)
   }
 
+  getSinglePlace(userID: string, tripID: string, placeID): Observable<Place>{
+    return this.http
+      .get<Place>(`${environment.apiUrl}/users/${userID}/trips/${tripID}/places/${placeID}`);
+  }
+
+  modifyPlace(userID: string, tripID: string, placeID: string, PlaceRequest: PlaceRequest){
+    return this.http.patch<Place>(`${environment.apiUrl}/users/${userID}/trips/${tripID}/places/${placeID}`, PlaceRequest)
+  }
+
+
+
 
 }
