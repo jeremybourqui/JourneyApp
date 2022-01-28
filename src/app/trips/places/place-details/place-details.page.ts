@@ -142,7 +142,7 @@ export class PlaceDetailsPage implements OnInit {
 
 
 
-    // Redirect to the page modify-trip
+    // Redirect to the page modify-places
     editRedirect(){
       this.router.navigateByUrl("/modify-place");
     }

@@ -28,7 +28,7 @@
   <!-- </ion-card> -->
 
 
-    <ion-button class="edit-button" (click)="editRedirect()">
+    <ion-button class="edit-button" [routerLink]="['../modify-places', placeDetails?._id]" tappable>
       <ion-icon slot="icon-only" name="create"></ion-icon>
     </ion-button>
 
