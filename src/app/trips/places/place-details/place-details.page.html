@@ -9,40 +9,40 @@
 
 <ion-content>
   <!-- <ion-card> -->
-    <ion-card-header>
-      <ion-img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
-    </ion-card-header>
-    <ion-card-content>
-      <p>
-        {{placeDetails?.description}}
-      </p>
-      <!-- <div id="map">
+  <ion-card-header>
+    <ion-img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      {{placeDetails?.description}}
+    </p>
+    <!-- <div id="map">
         <canvas width=600 height=300 style='background-color: #EEE;'></canvas>
         <div id="coordinate">
           Longitude: {{placeDetails?.location.coordinates[0]}},
           Latitude: {{placeDetails?.location.coordinates[1]}}
         </div>
       </div> -->
-      
-    </ion-card-content>
+
+  </ion-card-content>
   <!-- </ion-card> -->
 
-  
 
-  <ion-button class="edit-button" (click)="editRedirect()">
-    <ion-icon slot="icon-only" name="create"></ion-icon>
-  </ion-button>
+    <ion-button class="edit-button" (click)="editRedirect()">
+      <ion-icon slot="icon-only" name="create"></ion-icon>
+    </ion-button>
 
-  <!--<ion-button color="attention" (click)="delete(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
+    <!--<ion-button color="attention" (click)="delete(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
     <ion-icon slot="icon-only" name="trash"></ion-icon>
   </ion-button>-->
 
-  <!-- avec pop up de vérification -->
-  <ion-button color="attention" (click)="showConfirmAlert(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
-    <ion-icon slot="icon-only" name="trash"></ion-icon>
-  </ion-button>
+    <!-- avec pop up de vérification -->
+    <ion-button color="attention" (click)="showConfirmAlert(placeDetails?._id, placeDetails?.tripId)"
+      class="delete-button">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-button>
 
-  <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers" (leafletMapReady)="onMapReady($event)"></div>
+    <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
+      (leafletMapReady)="onMapReady($event)"></div>
 
 </ion-content>
-
