@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modify Place</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #placeForm="ngForm" (submit)="onSubmit(placeForm)">
+    <ion-list>
+      <!-- Title input -->
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input
+          inputmode="text"
+          #title="ngModel"
+          required="true"
+          name="title"
+          [(ngModel)]="placeRequest.title"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the username is invalid -->
+      <ion-item lines="none" *ngIf="title.invalid && title.touched">
+        <ion-text color="danger">Title is required.</ion-text>
+      </ion-item>
+
+      <!-- Description input -->
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input
+          inputmode="text"
+          #description="ngModel"
+          required="true"
+          name="description"
+          [(ngModel)]="placeRequest.description"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the description is invalid -->
+      <ion-item lines="none" *ngIf="description.invalid && description.touched">
+        <ion-text color="danger">Description is required.</ion-text>
+      </ion-item>
+
+      <!-- Location input -->
+      <ion-item>
+        <ion-label position="floating">Longitude</ion-label>
+        <ion-input
+          inputmode="number"
+          #longitude="ngModel"
+          
+          name="longitude"
+          [(ngModel)]="placeRequest.location.coordinates[1]"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the location is invalid -->
+      <ion-item lines="none" *ngIf="longitude.invalid && longitude.touched">
+        <ion-text color="danger">Longitude is required.</ion-text>
+      </ion-item>
+
+      <!-- Location input -->
+      <ion-item>
+        <ion-label position="floating">Latitude</ion-label>
+        <ion-input
+          inputmode="number"
+          #latitude="ngModel"
+          name="latitude"
+          [(ngModel)]="placeRequest.location.coordinates[0]"
+        ></ion-input>
+      </ion-item>
+  
+      <!-- Error message displayed if the location is invalid -->
+      <ion-item lines="none" *ngIf="longitude.invalid && longitude.touched">
+        <ion-text color="danger">Longitude is required.</ion-text>
+      </ion-item>
+
+      <!-- Picture input -->
+      <ion-item>
+        <ion-label position="floating">Picture</ion-label>
+        <ion-input
+          inputmode="text"
+          #picture="ngModel"
+          name="picture"
+          [(ngModel)]="placeRequest.pictureUrl"
+        ></ion-input>
+      </ion-item>
+
+      <ion-button (click)="takePicture()">Take picture</ion-button>
+      <!-- <img *ngIf="picture" [src]="picture.url" /> -->
+  
+      <!-- Error message displayed if the picture is invalid -->
+      <!-- <ion-item lines="none" *ngIf="location.invalid && location.touched">
+        <ion-text color="danger">Location is required.</ion-text>
+      </ion-item> -->
+
+    </ion-list>
+  
+    <div class="ion-padding">
+      <!-- Submit button -->
+      <ion-button type="submit" expand="block" [disabled]="placeForm.invalid"
+        >Modify place</ion-button
+      >
+  
+      <!-- Error message displayed if the login failed -->
+      <ion-text color="danger" *ngIf="formError"
+        >Form is invalid.</ion-text>
+    </div>
+  </form>
+
+</ion-content>

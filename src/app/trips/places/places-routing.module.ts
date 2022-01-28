@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'place-details/:placeId',
     loadChildren: () => import('../../Trips/Places/place-details/place-details.module').then( m => m.PlaceDetailsPageModule)
   },
+  {
+    path: 'modify-places/:placeId',
+    loadChildren: () => import('./modify-places/modify-places.module').then( m => m.ModifyPlacesPageModule)
+  },
+
 
 ];
 
