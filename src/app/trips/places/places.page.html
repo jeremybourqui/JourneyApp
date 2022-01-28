@@ -18,7 +18,7 @@
     <ion-card-header [routerLink]="['place-details', place._id]" tappable>
       <ion-card-title> {{ place.title}} </ion-card-title>
     </ion-card-header>
-    <div class="card-content">
+    <div [ngClass]="{'card-content':place.pictureUrl}">
       <ion-img class="img-content" *ngIf="place.pictureUrl" [src]="place.pictureUrl"></ion-img>
       <ion-card-text
         [ngClass]="{'textWithImage-content':place.pictureUrl, 'textWithoutImage-content':!place.pictureUrl}">{{

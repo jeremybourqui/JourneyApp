@@ -20,6 +20,10 @@ import { Location } from '@angular/common';
 
 import { AlertController } from '@ionic/angular';
 
+// import Leaflet
+import { latLng, MapOptions, tileLayer, Map, Marker, marker } from 'leaflet';
+import { defaultIcon } from '../../../default-marker';
+
 
 @Component({
   selector: 'app-place-details',
@@ -31,6 +35,15 @@ export class PlaceDetailsPage implements OnInit {
   //insertion place
   placeDetails?: Place;
   // place?: Place;
+
+  //insertion options map
+  mapOptions: MapOptions;
+
+  //insertion map
+  map: Map;
+
+  // insertion markers map
+  mapMarkers: Marker[];
 
   constructor(
 
@@ -50,7 +63,24 @@ export class PlaceDetailsPage implements OnInit {
     //Inject alertcontroller to make a popup before deleting
     public atrCtrl: AlertController,
 
-  ) { }
+  ) {
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
+
+    this.mapMarkers = [
+      marker([ 46.778186, 6.641524 ], { icon: defaultIcon }),
+      marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
+      marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
+    ];
+   }
 
   ionViewWillEnter() {
 
@@ -65,6 +95,8 @@ export class PlaceDetailsPage implements OnInit {
       ).subscribe(placeDetails => {
         this.placeDetails = placeDetails
         // console.log(this.placeDetails)
+        this.map.setView([this.placeDetails.location.coordinates[0], this.placeDetails.location.coordinates[1]], 13);
+        this.mapMarkers = [marker([placeDetails.location.coordinates[0], placeDetails.location.coordinates[1]], {icon: defaultIcon}).bindTooltip(this.placeDetails.title)]
       });
   }
 
@@ -113,6 +145,13 @@ export class PlaceDetailsPage implements OnInit {
     // Redirect to the page modify-trip
     editRedirect(){
       this.router.navigateByUrl("/modify-place");
+    }
+
+    onMapReady(map: Map) {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 0);
+      this.map = map;
     }
 
 

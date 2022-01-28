@@ -16,16 +16,17 @@
       <p>
         {{placeDetails?.description}}
       </p>
-      <div id="map">
+      <!-- <div id="map">
         <canvas width=600 height=300 style='background-color: #EEE;'></canvas>
         <div id="coordinate">
           Longitude: {{placeDetails?.location.coordinates[0]}},
           Latitude: {{placeDetails?.location.coordinates[1]}}
         </div>
-      </div>
+      </div> -->
       
     </ion-card-content>
   <!-- </ion-card> -->
+
   
 
   <ion-button class="edit-button" (click)="editRedirect()">
@@ -41,5 +42,7 @@
     <ion-icon slot="icon-only" name="trash"></ion-icon>
   </ion-button>
 
+  <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers" (leafletMapReady)="onMapReady($event)"></div>
 
 </ion-content>
+
