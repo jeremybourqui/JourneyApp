@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CreatePlace</ion-title>
+    <ion-title>Create a Place</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -19,12 +19,16 @@
           required="true"
           name="title"
           [(ngModel)]="placeRequest.title"
+          minlenght="3"
+          maxlenght="100"
+
+
         ></ion-input>
       </ion-item>
   
-      <!-- Error message displayed if the username is invalid -->
+      <!-- Error message displayed if the title is invalid -->
       <ion-item lines="none" *ngIf="title.invalid && title.touched">
-        <ion-text color="danger">Title is required.</ion-text>
+        <ion-text color="danger">Title is required, between 3 and 100 character</ion-text>
       </ion-item>
 
       <!-- Description input -->
@@ -36,12 +40,14 @@
           required="true"
           name="description"
           [(ngModel)]="placeRequest.description"
+          minlenght="3"
+          maxlenght="1000"
         ></ion-input>
       </ion-item>
   
       <!-- Error message displayed if the description is invalid -->
       <ion-item lines="none" *ngIf="description.invalid && description.touched">
-        <ion-text color="danger">Description is required.</ion-text>
+        <ion-text color="danger">Description is required, between 3 and 100 character</ion-text>
       </ion-item>
 
       <!-- Location input -->
@@ -73,8 +79,8 @@
       </ion-item>
   
       <!-- Error message displayed if the location is invalid -->
-      <ion-item lines="none" *ngIf="longitude.invalid && longitude.touched">
-        <ion-text color="danger">Longitude is required.</ion-text>
+      <ion-item lines="none" *ngIf="latitude.invalid && latitude.touched">
+        <ion-text color="danger">Latitude is required.</ion-text>
       </ion-item>
 
       <!-- Picture input -->
@@ -89,12 +95,6 @@
       </ion-item>
 
       <ion-button (click)="takePicture()">Take picture</ion-button>
-      <img *ngIf="picture" [src]="picture.url" />
-  
-      <!-- Error message displayed if the picture is invalid -->
-      <!-- <ion-item lines="none" *ngIf="location.invalid && location.touched">
-        <ion-text color="danger">Location is required.</ion-text>
-      </ion-item> -->
 
     </ion-list>
   
