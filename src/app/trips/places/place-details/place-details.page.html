@@ -25,19 +25,13 @@
       </div> -->
 
   </ion-card-content>
-  <!-- </ion-card> -->
-
 
     <ion-button class="edit-button" [routerLink]="['modify-places', placeDetails?._id]" tappable>
       <ion-icon slot="icon-only" name="create"></ion-icon>
     </ion-button>
 
-    <!--<ion-button color="attention" (click)="delete(placeDetails?._id, placeDetails?.tripId)" class="delete-button" >
-    <ion-icon slot="icon-only" name="trash"></ion-icon>
-  </ion-button>-->
-
     <!-- avec pop up de vérification -->
-    <ion-button color="attention" (click)="showConfirmAlert(placeDetails?._id, placeDetails?.tripId)"
+    <ion-button color="light" (click)="showConfirmAlert(placeDetails?._id, placeDetails?.tripId)"
       class="delete-button">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>

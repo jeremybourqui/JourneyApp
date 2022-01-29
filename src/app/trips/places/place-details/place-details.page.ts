@@ -137,13 +137,6 @@ export class PlaceDetailsPage implements OnInit {
     }
   }
 
-
-
-    // Redirect to the page modify-places
-    editRedirect(placeID: string){
-      this.router.navigateByUrl("/modify-places");
-    }
-
     onMapReady(map: Map) {
       setTimeout(() => {
         map.invalidateSize();

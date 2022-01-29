@@ -15,7 +15,7 @@ ion-button.delete-button{
     position:fixed;
     bottom: 50px;
     right: 20px;
-    --color: var(--attention, #EB445A);
+    // color: #EB445A !important; 
     z-index: 20;
     
 }
