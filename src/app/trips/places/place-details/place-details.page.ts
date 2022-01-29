@@ -76,9 +76,6 @@ export class PlaceDetailsPage implements OnInit {
     };
 
     this.mapMarkers = [
-      marker([ 46.778186, 6.641524 ], { icon: defaultIcon }),
-      marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
-      marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
     ];
    }
 
@@ -143,8 +140,8 @@ export class PlaceDetailsPage implements OnInit {
 
 
     // Redirect to the page modify-places
-    editRedirect(){
-      this.router.navigateByUrl("/modify-place");
+    editRedirect(placeID: string){
+      this.router.navigateByUrl("/modify-places");
     }
 
     onMapReady(map: Map) {

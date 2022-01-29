@@ -11,9 +11,9 @@ const routes: Routes = [
     component: PlaceDetailsPage
   },
   {
-    path: '/modify-places/:placeId',
-    loadChildren: () => import('../../../Trips/Places/modify-places/modify-places.module').then( m => m.ModifyPlacesPageModule)
-  },
+    path: 'modify-places/:placeId',
+    loadChildren: () => import('../../../Trips/places/modify-places/modify-places.module').then( m => m.ModifyPlacesPageModule)
+  }
 ];
 
 @NgModule({
