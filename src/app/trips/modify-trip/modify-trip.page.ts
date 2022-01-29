@@ -49,9 +49,9 @@ export class ModifyTripPage implements OnInit {
      const tripIdFromRoute = String(routeParams.get('tripId'));
  
      this.auth.getUser$().subscribe(user => {
-       this.tripService.getSingleTrip(user._id, tripIdFromRoute).subscribe(trip => {
-        this.trip = trip;
-         console.log(this.trip);
+       this.tripService.getSingleTrip(user._id, tripIdFromRoute).subscribe(tripRequest => {
+        this.tripRequest = tripRequest[0];
+         console.log(this.tripRequest);
        })
      })
   }
