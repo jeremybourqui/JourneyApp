@@ -9,20 +9,17 @@
 
 <ion-content>
   <!-- <ion-card> -->
-  <ion-card-header>
-    <ion-img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img>
-  </ion-card-header>
+  <div class="">
+    <ion-card-header class="ModuleImg">
+      <!-- <ion-img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl"></ion-img> -->
+      <img *ngIf="placeDetails?.pictureUrl" [src]="placeDetails?.pictureUrl">
+    </ion-card-header>
+  </div>
+  <hr>
   <ion-card-content>
     <p>
       {{placeDetails?.description}}
     </p>
-    <!-- <div id="map">
-        <canvas width=600 height=300 style='background-color: #EEE;'></canvas>
-        <div id="coordinate">
-          Longitude: {{placeDetails?.location.coordinates[0]}},
-          Latitude: {{placeDetails?.location.coordinates[1]}}
-        </div>
-      </div> -->
 
   </ion-card-content>
 
@@ -37,6 +34,11 @@
     </ion-button>
 
     <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
-      (leafletMapReady)="onMapReady($event)"></div>
+      (leafletMapReady)="onMapReady($event)">
+    </div>
+    <div class="coordinate">
+      Longitude: {{placeDetails?.location.coordinates[0]}},
+      Latitude: {{placeDetails?.location.coordinates[1]}}
+    </div>
 
 </ion-content>

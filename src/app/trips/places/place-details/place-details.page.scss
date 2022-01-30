@@ -15,18 +15,42 @@ ion-button.delete-button{
     position:fixed;
     bottom: 50px;
     right: 20px;
-    // color: #EB445A !important; 
     z-index: 20;
-    
 }
 
-// ion-img{
-//     width: 60%;
-//     height: 30%;
-// }
+ion-button.delete-button ion-icon{
+    color: #EB445A !important; 
+}
+
+hr {
+    border-bottom: 1px solid #333 !important;
+    width: 90%;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 20px;
+  }
+
+
+.ModuleImg{
+    overflow: hidden;
+    position: relative;
+    display:block;
+    height:200px;
+    line-height:200px;
+    overflow:hidden;
+
+}
+
+.ModuleImg img{
+    position: relative;
+    margin: -50% auto;/* virtualy height needed turn don to zero */
+    width: 100%;
+    height:auto;
+    vertical-align:middle;
+}
 
 .map {
-    height: 50%;
+    height: 30%;
     z-index: 3;
 }
 
@@ -34,7 +58,9 @@ ion-button.delete-button{
     margin: 10px auto;
 }
 
-#coordinate{
+.coordinate{
     color: #aeaeae;
     font-style: italic;
+    font-size: 0.8rem;
+    margin: 5px auto;
 }
